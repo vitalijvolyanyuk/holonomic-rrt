@@ -2,7 +2,7 @@
 
 Implementations of RRT-Extend, RRT-Connect, and Bidirectional RRT-Connect for a holonomic point robot. The planners work in any dimension, assuming the robot is holonomic. This demo defines the space as (x, y) with line-segment obstacles so the paths can be visualized. Extending this to a higher dimensional space would require updating the sampling, distance metric, and collision checking method.
 
-The three planners are compared on four maps: a wall map with wide gaps, and three narrow tunnel maps where the start and goal are placed differently.
+The three planners are compared on four maps: a serpentine wall map, and three narrow passage maps where the start and goal are placed differently.
 
 ## Motivation
 
@@ -40,9 +40,15 @@ Rapidly-exploring random trees (RRT) [1] is a sampling-based planner. Rather tha
 
 ## Results
 
+Each planner was run on 100 seeds per map. The plots show one seed. The map is 10 x 10, the step size is 0.5, and the single-tree planners use a goal bias of 0.05. The results are medians. An iteration is one sample. A collision check is one call to the collision checker, including smoothing. Runs stop at 10,000 iterations, and failed runs count toward the median iterations.
+
 **Walls**
 
-[INSERT 3 IMAGES]
+<p align="center">
+  <img src="demo_results/walls/extend_walls.png" width="32%">
+  <img src="demo_results/walls/connect_walls.png" width="32%">
+  <img src="demo_results/walls/bidirectional_walls.png" width="32%">
+</p>
 
 [INSERT EXPLANATION]
 
@@ -72,7 +78,11 @@ Bidirectional RRT-Connect
 
 **Open rooms with tunnel**
 
-[INSERT 3 IMAGES]
+<p align="center">
+  <img src="demo_results/tunnel_open/extend_open.png" width="32%">
+  <img src="demo_results/tunnel_open/connect_open.png" width="32%">
+  <img src="demo_results/tunnel_open/bidirectional_open.png" width="32%">
+</p>
 
 [INSERT EXPLANATION]
 
@@ -102,7 +112,11 @@ Bidirectional RRT-Connect
 
 **Start in tunnel**
 
-[INSERT 3 IMAGES]
+<p align="center">
+  <img src="demo_results/tunnel_start/extend_start.png" width="32%">
+  <img src="demo_results/tunnel_start/connect_start.png" width="32%">
+  <img src="demo_results/tunnel_start/bidirectional_start.png" width="32%">
+</p>
 
 [INSERT EXPLANATION]
 
@@ -132,7 +146,11 @@ Bidirectional RRT-Connect
 
 **Goal in tunnel**
 
-[INSERT 3 IMAGES]
+<p align="center">
+  <img src="demo_results/tunnel_goal/extend_goal.png" width="32%">
+  <img src="demo_results/tunnel_goal/connect_goal.png" width="32%">
+  <img src="demo_results/tunnel_goal/bidirectional_goal.png" width="32%">
+</p>
 
 [INSERT EXPLANATION]
 
