@@ -40,7 +40,7 @@ Rapidly-exploring random trees (RRT) [1] is a sampling-based planner. Rather tha
 
 ## Results
 
-Each planner was run on 100 seeds per map. The plots show one seed. The map is 10 x 10, the step size is 0.5, and the single-tree planners use a goal bias of 0.05. The results are medians. An iteration is one sample. A collision check is one call to the collision checker, including smoothing. Runs stop at 10,000 iterations, and failed runs count toward the median iterations.
+Each planner was run on 100 seeds per map. The plots show one seed. The map is 10 x 10, the step size is 0.5, and the single-tree planners use a goal bias of 0.05. The results are medians. An iteration is one sample. Runs stop at 10,000 iterations, and failed runs count toward the median iterations. A collision check is one call to the collision checker, including checks done in smoothing. Nodes is the tree size.
 
 **Walls**
 
