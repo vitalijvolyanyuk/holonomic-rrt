@@ -50,7 +50,9 @@ Each planner was run on 100 seeds per map. The plots show one seed. The map is 1
   <img src="demo_results/walls/bidirectional_walls.png" width="32%">
 </p>
 
-[INSERT EXPLANATION]
+The serpentine wall map is a classic map to visualize planner behavior in the general case. Each tree has to reach one opening before it can start looking for the next, and it keeps growing in the sections it has already entered. The openings are wide, so the difficulty is finding them in sequence. 
+
+Each planner was successful in finding a path across all seeds. RRT-Extend had the most iterations, collision checks, and nodes in the tree, since each sample only takes a single step. RRT-Connect had lower iterations, collision checks, and nodes in the tree, since the connect extension more aggressively connects the samples to the tree, and a single sample can carry the tree to a new section. Bidirectional RRT-Connect had the lowest iterations, collision checks, and nodes in the tree, since each tree only has to cover about half the sections before they meet. While bidirectional had the lowest cost, connect's aggressive step style means the path was coarser. The smoother only shortcuts between points already on the path, so RRT-Extend's dense path gave it more points to work with and produced the shortest smoothed path.
 
 ```
 RRT-Extend
@@ -84,7 +86,13 @@ Bidirectional RRT-Connect
   <img src="demo_results/tunnel_open/bidirectional_open.png" width="32%">
 </p>
 
-[INSERT EXPLANATION]
+The open rooms with tunnel map has two open sections separated by a narrow passage (tunnel). The start and goal were placed away from the narrow passage to expose the difficulty of finding the openings and getting through.
+
+Each planner had unsuccessful attempts in this map. The success rate from lowest to highest was: RRT-Extend, RRT-Connect, Bidirectional RRT-Connect. This is due to how each planner has to cross the narrow passage. RRT-Extend needs a sequence of rare samples that keep pulling it forward inside the passage, leading to the largest amount of the start section being searched and max iterations being reached in some seeds. RRT-Connect only needs one sample on the far side that aligns with the passage, since a single connect can carry it all the way through, making it more likely to find a way through the passage and giving it a higher success rate than RRT-Extend. Bidirectional RRT-Connect grows both trees to the passage openings. Once one tree enters the passage, the other connects directly toward its newest node rather than waiting for a lucky sample like RRT-Connect, so the chance of joining is higher.
+
+The cost of each planner is similar to the serpentine wall map, with costs from highest to lowest being RRT-Extend, RRT-Connect, Bidirectional RRT-Connect.
+
+
 
 ```
 RRT-Extend
