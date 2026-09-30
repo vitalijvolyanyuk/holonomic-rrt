@@ -126,7 +126,13 @@ Bidirectional RRT-Connect
   <img src="demo_results/tunnel_start/bidirectional_start.png" width="32%">
 </p>
 
-[INSERT EXPLANATION]
+This map places the start inside of the narrow passage and goal inside of an open room. This was meant to stress the sampling to see how the planners could escape the passage.
+
+While it appears that RRT-extend had the simplest tree, it had the highest computation with 66 nodes and 554 collision checks. RRT-Connect had a similar result with 62 nodes and 440 collision checks. Bidirectional RRT had the fewest computation cost, but not by much, with 55 nodes and 360 collision checks. The reason Connect's and Bidirectional-Connect's tree appears larger, but has fewer nodes is because the nodes are only counted as the end points of the connection step. 
+
+Shown above, Extend appears to have a more directed path toward the goal, while Connect and BiDirectional-Connect appear to be exploring the wrong room. This is and example of the Voronoi Bias being amplified by the Connect step. The Voronoi bias is the core mathematical mechanism that allows a Rapidly-exploring Random Tree (RRT) to aggressively expand into unexplored areas, and a few samples in the incorrect room is more likely to draw the tree outside of the passage with Connect, where as Extend requires a unrealistic amount of lucky samples perfectly aligned with the path to draw the tree outside of the narrow passage.
+
+All trees were successful in finding the goal within the maximum iterations. While sampling was stressed, beginning inside the narrow passage tends to be easier than a finding a goal inside of the passage, which is discussed in the next section.
 
 ```
 RRT-Extend
@@ -160,7 +166,11 @@ Bidirectional RRT-Connect
   <img src="demo_results/tunnel_goal/bidirectional_goal.png" width="32%">
 </p>
 
-[INSERT EXPLANATION]
+This scenario places the start inside of an open room and goal inside of the narrow passage. This was meant to isolate finding the passage from the first scenario where both start and goal started in open rooms. Unlike the scenario above which each planner was successful, this scenario shows clear advantages of Bidirectional RRT-Connect. 
+
+RRT-Extend and RRT-Connect had similar success rates of 81-82%, and similar computation costs of 2500-2600 nodes explored and 2600-2800 collision checks. BiDictional RRT-Connect had a 100% success rate, with significantly lower computational costs of 64 nodes and 408 collision checks. This is due to Bidirectional search nature of growing a tree from both sides. The advantage here is that BiDirectional can grow a tree to escape the narrow passage, while the other planners cannot. The other planners growing the trees from the start and rely on lucky samples to discovering the passage.
+
+The difference in results between this scenario and the open rooms scenario comes down to sampling. Here Bidirectional-Connect was able to start a tree from the passage, whereas in the open rooms Bidirectional-Connect had to discover the passage. The open room scenario more stressed by sampling, and the planner to sample a path through a longer corridor to connect the trees in limited iterations, which led to lower success rates. Overall, this shows a real advantage of Bidirectional planners in scenarios with a start or goal inside the narrow passage.
 
 ```
 RRT-Extend
